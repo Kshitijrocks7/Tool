@@ -1,0 +1,40 @@
+package as; 
+ 
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.chrome.ChromeDriver; 
+import org.openqa.selenium.WebElement; 
+ 
+public class P12 { 
+    public static void main(String[] args) { 
+        WebDriver driver = new ChromeDriver(); 
+         
+        // Navigate to the Facebook login page 
+        driver.get("https://www.facebook.com/"); 
+         
+        // Enter invalid credentials 
+        
+driver.findElement(By.name("email")).sendKeys("invalid_email@example.com"); 
+        driver.findElement(By.name("pass")).sendKeys("incorrect_password"); 
+         
+        // Submit the login form 
+        driver.findElement(By.name("login")).click(); 
+         
+        // Wait for the error message to appear (this could be replaced by 
+explicit waits for better synchronization) 
+        WebElement errorMessage = 
+driver.findElement(By.xpath("//div[contains(text(),'The email or mobile number you 
+entered isn’t connected to an account.')]")); 
+         
+        // Verify the error message appears 
+        if (errorMessage.isDisplayed()) { 
+            System.out.println("Error message displayed: " + 
+errorMessage.getText()); 
+        } else { 
+            System.out.println("Error message not displayed."); 
+        } 
+         
+        // Close the browser after the test 
+        driver.quit(); 
+    } 
+} 
