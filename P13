@@ -1,0 +1,49 @@
+package as; 
+ 
+import java.time.Duration; 
+ 
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.WebElement; 
+import org.openqa.selenium.chrome.ChromeDriver; 
+import org.openqa.selenium.support.ui.ExpectedConditions; 
+import org.openqa.selenium.support.ui.WebDriverWait; 
+ 
+public class P13 { 
+    public static void main(String[] args) { 
+        WebDriver driver = new ChromeDriver(); 
+         
+        // Open Google and perform a search 
+        driver.get("https://www.google.com/"); 
+         
+        // Find the search box and input a query 
+        WebElement searchBox = driver.findElement(By.name("q")); 
+        searchBox.sendKeys("NMIT"); 
+         
+        // Wait until the search button is clickable, then click it 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10)); 
+        WebElement searchButton = 
+wait.until(ExpectedConditions.elementToBeClickable(By.name("btnK"))); 
+        searchButton.click(); 
+         
+        // Wait until a result link appears, click the first result (for 
+demonstration purposes) 
+        WebElement firstResult = 
+wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//h3"))); 
+        firstResult.click(); 
+         
+        // Wait for the page to load, and navigate back 
+        wait.until(ExpectedConditions.titleContains("NMIT")); 
+        driver.navigate().back(); 
+         
+        // Wait again for the Google home page to reload and click the search 
+button again 
+        wait.until(ExpectedConditions.titleContains("Google")); 
+        WebElement searchBox2 = driver.findElement(By.name("q")); 
+        searchBox2.sendKeys("Selenium WebDriver"); 
+        searchButton.click(); 
+         
+        // Finally, quit the browser 
+        driver.quit(); 
+    } 
+} 
