@@ -1,0 +1,92 @@
+package as; 
+ 
+/* 19. Scenario: Handling Alerts and Pop-ups  
+   The application displays an alert or pop-up during certain interactions.  
+   How would you handle alerts and pop-ups using Selenium?  
+   Provide an example scenario and demonstrate your approach. */ 
+ 
+import java.time.Duration; 
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.WebElement; 
+import org.openqa.selenium.chrome.ChromeDriver; 
+import org.openqa.selenium.Alert; 
+import org.openqa.selenium.support.ui.ExpectedConditions; 
+import org.openqa.selenium.support.ui.WebDriverWait; 
+ 
+public class P19 { 
+ 
+    public static void main(String[] args) { 
+        WebDriver driver = new ChromeDriver(); 
+         
+        try { 
+            // Open the JavaScript Alerts page 
+            driver.get("https://the-internet.herokuapp.com/javascript_alerts"); 
+            driver.manage().window().maximize(); 
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); 
+             
+            WebDriverWait wait = new WebDriverWait(driver, 
+Duration.ofSeconds(10)); 
+             
+            // Handle Simple Alert 
+            WebElement alertButton = 
+driver.findElement(By.xpath("//button[text()='Click for JS Alert']")); 
+            alertButton.click(); 
+             
+            // Explicit wait for alert to be present and accept it 
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent()); 
+            alert.accept(); 
+             
+            // Verify the result after handling the alert 
+            WebElement resultText = driver.findElement(By.id("result")); 
+            if (resultText.getText().equals("you successfully clicked an alert")) 
+{ 
+                System.out.println("Simple alert handled successfully"); 
+            } else { 
+                System.out.println("Simple alert handling failed"); 
+            } 
+             
+            // Handle Confirm Alert (Dismiss) 
+            WebElement confirmButton = 
+driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")); 
+            confirmButton.click(); 
+             
+            // Explicit wait for confirm alert to be present and dismiss it 
+            alert = wait.until(ExpectedConditions.alertIsPresent()); 
+            alert.dismiss(); 
+             
+            // Verify the result after handling the confirm alert 
+            WebElement resultText1 = driver.findElement(By.id("result")); 
+            if (resultText1.getText().equals("you clicked: cancel")) { 
+                System.out.println("Confirmation alert handled successfully"); 
+            } else { 
+                System.out.println("Confirmation alert handling failed"); 
+            } 
+             
+            // Handle Prompt Alert (Send text and accept) 
+            WebElement promptButton = 
+driver.findElement(By.xpath("//button[text()='Click for JS Prompt']")); 
+            promptButton.click(); 
+             
+            // Explicit wait for prompt alert to be present, send text, and accept 
+the alert 
+            alert = wait.until(ExpectedConditions.alertIsPresent()); 
+            alert.sendKeys("Hello, Selenium!"); 
+            alert.accept(); 
+             
+            // Verify the result after handling the prompt alert 
+            WebElement resultText2 = driver.findElement(By.id("result")); 
+            if (resultText2.getText().equals("you entered: Hello, Selenium!")) { 
+                System.out.println("Prompt alert handled successfully"); 
+            } else { 
+                System.out.println("Prompt alert handling failed"); 
+            } 
+        } catch (Exception e) { 
+            // Handle any exceptions that occur during the test execution 
+            e.printStackTrace(); 
+        } finally { 
+            // Quit the browser at the end of the test 
+            driver.quit(); 
+        } 
+    } 
+} 
