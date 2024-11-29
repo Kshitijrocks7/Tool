@@ -1,0 +1,56 @@
+package as; 
+ 
+/* 17. Scenario: File Upload Automation  
+   The application requires users to upload a file. How would you automate the 
+file upload process  
+   using Selenium? Provide steps to locate the file input element, interact with 
+it, and verify the  
+   successful file upload. */ 
+ 
+import java.time.Duration; 
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.WebElement; 
+import org.openqa.selenium.chrome.ChromeDriver; 
+ 
+public class P17 { 
+ 
+    public static void main(String[] args) { 
+        WebDriver driver = new ChromeDriver(); 
+        try { 
+            // Step 1: Navigate to the file upload page 
+            driver.get("https://the-internet.herokuapp.com/upload"); 
+ 
+            // Step 2: Maximize the browser window 
+            driver.manage().window().maximize(); 
+ 
+            // Step 3: Set an implicit wait for elements to be located 
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); 
+ 
+            // Step 4: Locate the file input element and upload the file 
+            WebElement fileInput = driver.findElement(By.id("file-upload")); 
+            // Use the file path you provided 
+            fileInput.sendKeys("C:\\Users\\yash\\Downloads\\txt.txt"); 
+ 
+            // Step 5: Locate and click the "Upload" button 
+            WebElement uploadButton = driver.findElement(By.id("file-submit")); 
+            uploadButton.click(); 
+ 
+            // Step 6: Verify if the file upload was successful 
+            WebElement successMessage = driver.findElement(By.id("uploaded
+files")); 
+            if (successMessage.getText().equals("txt.txt")) { 
+                System.out.println("File upload successful and verified."); 
+            } else { 
+                System.out.println("File upload verification failed."); 
+            } 
+ 
+        } catch (Exception e) { 
+            // Handle any exceptions 
+            System.out.println("An error occurred: " + e.getMessage()); 
+        } finally { 
+            // Step 7: Close the browser after the test 
+            driver.quit(); 
+        } 
+    } 
+}
