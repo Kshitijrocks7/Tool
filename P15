@@ -1,0 +1,52 @@
+package test;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class DataDriven {
+
+	public static void main(String[] args) {
+		WebDriver driver=new ChromeDriver();
+		String csvFile="C:\\Users\\Suchithra\\Downloads";
+		String line;
+		
+		try(BufferedReader br= new BufferedReader(new FileReader(csvFile))) {
+			br.readLine();
+			while((line=br.readLine()) !=null ) {
+				String[] data =line.split(",");
+				String username=data[0];
+				String password=data[1];
+				
+			driver.get("http://lms.nmit.ac.in/moodle/login/index.php");
+			
+			
+			WebElement usernameField=driver.findElement(By.id("username"));
+			WebElement passwordField=driver.findElement(By.id("password"));
+			WebElement loginBtn=driver.findElement(By.id("loginbtn"));
+			
+			usernameField.sendKeys(username);
+			passwordField.sendKeys(password);
+			loginBtn.click();
+			
+			
+			
+			
+			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+//		finally {
+//			driver.quit();
+//		}
+
+	}
+
+}
