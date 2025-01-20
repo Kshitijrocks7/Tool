@@ -1,0 +1,55 @@
+package javaProject;
+
+import java.util.Set;
+import java.util.HashSet;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class parallelProg {
+
+    public static void main(String args[]) { 
+
+        // Initialize the ChromeDriver
+        WebDriver driver = new ChromeDriver();
+        
+        // Open the first URL (Google)
+        driver.get("https://www.google.com");
+        System.out.println("Title of First Window: " + driver.getTitle());
+        
+        // Store the original window handle
+        String originalWindow = driver.getWindowHandle();
+
+        // Keep track of all visited windows
+        Set<String> visitedWindows = new HashSet<>();
+        visitedWindows.add(originalWindow);
+
+        // Open second URL (Bing) in a new window
+        ((ChromeDriver) driver).executeScript("window.open('https://www.bing.com', '_blank');");
+        switchToNewWindow(driver, visitedWindows);
+        System.out.println("Title of Second Window: " + driver.getTitle());
+
+        // Open third URL (Yahoo) in another new window
+        ((ChromeDriver) driver).executeScript("window.open('https://www.yahoo.com', '_blank');");
+        switchToNewWindow(driver, visitedWindows);
+        System.out.println("Title of Third Window: " + driver.getTitle());
+
+        // Switch back to the original window
+        driver.switchTo().window(originalWindow);
+        System.out.println("Back to First Window: " + driver.getTitle());
+        
+        // Close all windows
+        driver.quit();
+    }
+
+    private static void switchToNewWindow(WebDriver driver, Set<String> visitedWindows) {
+        Set<String> windowHandles = driver.getWindowHandles();
+        for (String handle : windowHandles) {
+            if (!visitedWindows.contains(handle)) {
+                driver.switchTo().window(handle);
+                visitedWindows.add(handle); // Mark this window as visited
+                return;
+            }
+        }
+    }
+}
