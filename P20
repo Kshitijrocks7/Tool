@@ -1,0 +1,62 @@
+package test;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.By;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class crossBrowsing {
+    public static void main(String[] args) {
+        // List of browsers to test
+        String[] browsers = {"chrome",  "edge"};
+
+        // Iterate through each browser
+        for (String browser : browsers) {
+            WebDriver driver = null;
+
+            try {
+                // Set up the WebDriver for each browser
+                switch (browser.toLowerCase()) {
+                    case "chrome":
+                        WebDriverManager.chromedriver().setup();
+                        driver = new ChromeDriver();
+                        break;
+                    
+                    case "edge":
+                        WebDriverManager.edgedriver().setup();
+                        driver = new EdgeDriver();
+                        break;
+                    default:
+                        System.out.println("Unsupported browser: " + browser);
+                        continue;
+                }
+
+                // Navigate to the LMS login page
+                driver.get("http://lms.nmit.ac.in/moodle/login/index.php");
+                System.out.println("Browser: " + browser);
+                System.out.println("Title: " + driver.getTitle());
+
+                // Perform login
+                driver.findElement(By.id("username")).sendKeys("27683"); // Replace with your username
+                driver.findElement(By.id("password")).sendKeys("Nmit@2023"); // Replace with your password
+                driver.findElement(By.id("loginbtn")).click();
+
+                // Verify successful login
+                if (driver.getCurrentUrl().contains("http://lms.nmit.ac.in/moodle/my/")) {
+                    System.out.println(browser + " login test passed.");
+                } else {
+                    System.out.println(browser + " login test failed.");
+                }
+            } catch (Exception e) {
+                System.out.println("Error occurred in " + browser + ": " + e.getMessage());
+            } finally {
+                // Close the browser
+                if (driver != null) {
+                    driver.quit();
+                }
+            }
+        }
+    }
+}
