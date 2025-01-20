@@ -1,0 +1,48 @@
+1.Scenario: Web Application Testing
+Imagine you are testing a web application that involves user registration, login, and profile
+management. Explore the steps you would take to test these functionalities, including positive and
+negative scenarios? write test cases for the scenario.
+
+2.Scenario: Mobile App Installation and Basic Functionality
+You are testing a mobile application. Describe the steps you would follow to install the app on
+both Android and iOS devices. What basic functionality would you test immediately after
+installation? write test cases for the scenario.
+
+3.Scenario: Compatibility Testing
+The application needs to be compatible with multiple browsers. In a lab environment, how would
+you perform cross-browser testing? What tools and techniques would you use? write test cases for
+the scenario.
+
+4.Scenario: Load Testing for an E-commerce Site
+You are tasked with conducting load testing for an e-commerce website during a sale event. What
+tools would you use, and how would you simulate a large number of concurrent users to assess the
+website's performance under heavy load? write test cases for the scenario.
+
+5.Scenario: Security Testing for a Banking Application
+You are testing a banking application that involves sensitive user information. How would you
+approach security testing, and what specific test scenarios would you include to ensure the
+application's security? write test cases for the scenario.
+
+6.Scenario: Regression Testing for a Content Management System (CMS)
+The development team has introduced new features in a CMS. Describe the process you would
+follow for regression testing to ensure that existing functionality is not affected. How would you
+handle version control during regression testing? write test cases for the scenario.
+
+7.Scenario: Usability Testing for a Social Media Platform
+You are testing a social media platform. How would you conduct usability testing to ensure an
+optimal user experience? What metrics or criteria would you use to evaluate the platform's
+usability? write test cases for the scenario.
+
+8.Scenario: Data Integrity Testing for an Inventory System
+You are testing an inventory management system. What steps would you take to verify the
+accuracy and integrity of data within the system? write test cases for the scenario.
+
+9.Scenario: Mobile App Interruption Handling
+While a user is using a mobile banking app, they receive a phone call. How would you test and
+ensure that the app handles interruptions gracefully and securely resumes after the call ends? write
+test cases for the scenario.
+
+10.Scenario: End-to-End Testing for an Online Booking System
+You are testing an online booking system for hotels. Describe the end-to-end testing scenarios you
+would execute to ensure a seamless user experience, from searching for a hotel to completing the
+booking. write test cases for the scenario.
