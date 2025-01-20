@@ -1,10 +1,6 @@
 package as; 
  
-/* 19. Scenario: Handling Alerts and Pop-ups  
-   The application displays an alert or pop-up during certain interactions.  
-   How would you handle alerts and pop-ups using Selenium?  
-   Provide an example scenario and demonstrate your approach. */ 
- 
+//Handling Alerts and Pop-ups
 import java.time.Duration; 
 import org.openqa.selenium.By; 
 import org.openqa.selenium.WebDriver; 
