@@ -1,0 +1,47 @@
+package test;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.time.Duration;
+
+public class prg16 {
+    public static void main(String[] args) {
+        // Initialize the ChromeDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Create WebDriverWait with a timeout of 15 seconds
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        try {
+            // Step 1: Open the web application
+            driver.get("https://the-internet.herokuapp.com/notification_message_rendered");
+            driver.manage().window().maximize();
+
+            // Step 2: Wait for the "Click here" link and click it
+            WebElement link = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Click here")));
+            link.click();
+
+            // Step 3: Wait for the notification message to appear
+            WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("flash")));
+            String notificationText = notification.getText();
+
+            // Step 4: Validate the notification message
+            if (notificationText.contains("Action successful")) {
+                System.out.println("The action was successful!");
+            } else if (notificationText.contains("Action unsuccessful")) {
+                System.out.println("The action was unsuccessful. Please try again.");
+            } else {
+                System.out.println("Unexpected notification: " + notificationText);
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Print stack trace for debugging
+        } finally {
+            // Step 5: Close the browser
+            //driver.quit();
+        }
+    }
+}
