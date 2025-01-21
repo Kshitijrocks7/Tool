@@ -1,13 +1,5 @@
 //FILE UPLOAD AUTOMATION
 package as; 
- 
-/* 17. Scenario: File Upload Automation  
-   The application requires users to upload a file. How would you automate the 
-file upload process  
-   using Selenium? Provide steps to locate the file input element, interact with 
-it, and verify the  
-   successful file upload. */ 
- 
 import java.time.Duration; 
 import org.openqa.selenium.By; 
 import org.openqa.selenium.WebDriver; 
